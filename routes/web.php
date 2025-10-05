@@ -13,3 +13,7 @@ Route::get('/login', function() {
 Route::get('/register', function() {
     return view('auth.register');
 });
+
+Route::get('/google-play', function () {
+    return redirect()->away('https://play.google.com/store/apps/details?id=');
+})->name('google-play');

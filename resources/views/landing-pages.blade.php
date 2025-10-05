@@ -34,7 +34,7 @@
         <div class="daftar">
 
             <div class="btn-daftar" id="google-play">
-                <a href="{{ route('login') }}">
+                <a href="{{route('google-play')}}">
                     <img width="16" src="{{ asset('img/google-play-logo.png') }}" alt="Web Icon">
                     Dapatkan di Google Play
                 </a>
