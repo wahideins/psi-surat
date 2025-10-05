@@ -30,9 +30,29 @@
 
     <div class="frasa">
         <h1>Pelayanan Surat Menyurat <br> Kelurahan Sukorame</h1>
-        <div class="btn-daftar">
-            <a href="#">Daftar</a>
+
+        <div class="daftar">
+
+            <div class="btn-daftar" id="google-play">
+                <a href="{{ route('login') }}">
+                    <img width="16" src="{{ asset('img/google-play-logo.png') }}" alt="Web Icon">
+                    Dapatkan di Google Play
+                </a>
+            </div>
+
+            <div class="btn-daftar" id="random">
+                <p>Atau</p>
+            </div>
+
+            <div class="btn-daftar">
+                <a href="{{ route('login') }}">
+                    <img width="16" src="{{ asset('img/world-wide-signal.png') }}" alt="Web Icon">
+                    Lanjutkan di Web
+                </a>
+            </div>
         </div>
+
+
     </div>
 
 </div>

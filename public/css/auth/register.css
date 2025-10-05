@@ -1,0 +1,111 @@
+/* public/css/register-multi.css or resources/css if using Mix/Vite */
+:root{
+  --bg:#f5f7fb;
+  --card:#ffffff;
+  --accent:#3b82f6;
+  --muted:#6b7280;
+  --danger:#ef4444;
+  --radius:12px;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+  background:linear-gradient(180deg,#eef2ff 0%,var(--bg) 100%);
+  color:#111827;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+}
+
+.container{
+  width:100%;
+  max-width:720px;
+  background:var(--card);
+  border-radius:var(--radius);
+  box-shadow:0 6px 30px rgba(16,24,40,0.08);
+  padding:28px;
+}
+
+.title{
+  margin:0 0 12px;
+  font-size:20px;
+  font-weight:600;
+  color:#0f172a;
+}
+
+.progress{
+  height:8px;
+  width:100%;
+  background:#e6eefc;
+  border-radius:999px;
+  margin-bottom:20px;
+  overflow:hidden;
+}
+.progress-bar{
+  height:100%;
+  background:linear-gradient(90deg,var(--accent),#60a5fa);
+  width:0%;
+  transition:width .35s ease;
+}
+
+.form-step{ display:none; animation:fadeIn .25s ease; }
+.form-step.active{ display:block; }
+
+.form-step h2{ margin:4px 0 14px; font-size:16px; color:#0f172a; }
+
+.field{ margin-bottom:14px; }
+.field-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px; }
+
+label{ display:block; font-size:13px; color:var(--muted); margin-bottom:6px; }
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+input[type="password"]{
+  width:100%;
+  padding:10px 12px;
+  font-size:14px;
+  border:1px solid #e6eefc;
+  border-radius:8px;
+  background:#fbfdff;
+  outline:none;
+  transition:border-color .15s, box-shadow .15s;
+}
+input:focus{ border-color:var(--accent); box-shadow:0 4px 16px rgba(59,130,246,0.08); }
+
+.error{ color:var(--danger); font-size:12px; display:block; height:14px; margin-top:6px; }
+
+.actions{ display:flex; gap:10px; justify-content:flex-end; margin-top:6px; }
+.btn{
+  padding:8px 14px;
+  border-radius:10px;
+  border:0;
+  cursor:pointer;
+  font-weight:600;
+}
+.btn-next{ background:var(--accent); color:white; }
+.btn-prev{ background:#eef2ff; color:var(--accent); }
+.btn-submit{ background:#10b981; color:white; }
+
+.btn:active{ transform:translateY(1px); }
+
+.form-msg{
+  margin-top:16px;
+  font-size:14px;
+  color:var(--muted);
+}
+
+/* responsive */
+@media (max-width:600px){
+  .field-grid{ grid-template-columns:1fr; }
+  .actions{ flex-direction:column-reverse; align-items:stretch; }
+}
+
+/* small animation */
+@keyframes fadeIn{
+  from{ opacity:0; transform:translateY(6px) }
+  to{ opacity:1; transform:none }
+}
