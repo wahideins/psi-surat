@@ -24,7 +24,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const inputs = Array.from(step.querySelectorAll('input'));
 
     inputs.forEach(input => {
-      const errorEl = input.parentElement.querySelector('.error');
+      const errorEl = input.closest('.field')?.querySelector('.error');
+      if (!errorEl) return; // skip kalau tidak ada elemen error
       errorEl.textContent = '';
 
       if (input.hasAttribute('required') && !input.value.trim()) {

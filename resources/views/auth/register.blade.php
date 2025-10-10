@@ -7,6 +7,12 @@
   <title>Registrasi - SIMARSU</title>
   <!-- link ke file CSS jika ingin -->
   <link rel="stylesheet" href="{{ asset('css/auth/register.css') }}">
+
+    <!-- Font Alexandria -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&display=swap" rel="stylesheet">
+    <!-- Font Alexandria -->
 </head>
 <body>
   <main class="container">
@@ -23,8 +29,45 @@
       <section class="form-step active" data-step="1">
         <h2>Informasi Pribadi</h2>
         <div class="field">
+          <label for="nik">NIK</label>
+          <input id="nik" name="nik" type="text" required />
+          <small class="error"></small>
+        </div>
+
+        <div class="field">
           <label for="fullname">Nama Lengkap</label>
           <input id="fullname" name="fullname" type="text" required />
+          <small class="error"></small>
+        </div>
+
+        <div class="field">
+          <label for="tempat-lahir">Tempat Lahir</label>
+          <input id="tempat-lahir" name="tempat-lahir" type="text" required />
+          <small class="error"></small>
+        </div>
+
+        <div class="field">
+          <label for="jenis-kelamin">Jenis Kelamin</label>
+          <div class="radio-group">
+            <label><input type="radio" name="jenis-kelamin" value="L"> Laki-Laki</label>
+            <label><input type="radio" name="jenis-kelamin" value="P"> Perempuan</label>
+          </div>
+          <small class="error"></small>
+        </div>
+
+        <div class="field">
+          <label for="status-perkawinan">Status Perkawinan</label>
+          <div class="radio-group">
+            <label><input type="radio" name="status-perkawinan" value="belum-kawin"> Belum Kawin</label>
+            <label><input type="radio" name="status-perkawinan" value="sudah-menikah"> Sudah Menikah</label>
+          </div>
+          <small class="error"></small>
+        </div>
+
+
+        <div class="field">
+          <label for="pekerjaan">Pekerjaan</label>
+          <input id="pekerjaan" name="pekerjaan" type="text" required />
           <small class="error"></small>
         </div>
 
@@ -50,16 +93,52 @@
 
         <div class="field-grid">
           <div class="field">
-            <label for="city">Kota</label>
+            <label for="rt">RT</label>
+            <input id="rt" name="rt" type="number" required />
+            <small class="error"></small>
+          </div>
+          <div class="field">
+            <label for="rw">RW</label>
+            <input id="rw" name="rw" type="number"/>
+            <small class="error"></small>
+          </div>
+        </div>
+
+        <div class="field-grid">
+          <div class="field">
+            <label for="kel-desa">Kelurahan/Desa</label>
+            <input id="kel-desa" name="kel-desa" type="text" required />
+            <small class="error"></small>
+          </div>
+
+          <div class="field">
+            <label for="kecamatan">Kecamatan</label>
+            <input id="kecamatan" name="kecamatan" type="text" required />
+            <small class="error"></small>
+          </div>
+        </div>
+
+
+        <div class="field-grid">
+          <div class="field">
+            <label for="city">Kota/Kab</label>
             <input id="city" name="city" type="text" required />
             <small class="error"></small>
           </div>
+
           <div class="field">
             <label for="postal">Kode Pos</label>
             <input id="postal" name="postal" type="text" pattern="\d{4,6}" />
             <small class="error"></small>
           </div>
         </div>
+
+        <div class="field">
+          <label for="ktp">Upload KTP atau Kartu Identitas</label>
+          <input id="ktp" name="ktp" type="file" accept="image/*,.pdf" />
+          <small class="error"></small>
+        </div>
+
 
         <div class="actions">
           <button type="button" class="btn btn-prev">Kembali</button>
@@ -88,6 +167,7 @@
             <small class="error"></small>
           </div>
         </div>
+
 
         <div class="actions">
           <button type="button" class="btn btn-prev">Kembali</button>
