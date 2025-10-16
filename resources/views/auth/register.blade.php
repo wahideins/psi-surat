@@ -1,186 +1,177 @@
-<!-- resources/views/auth/register.blade.php -->
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Registrasi - SIMARSU</title>
-  <!-- link ke file CSS jika ingin -->
-  <link rel="stylesheet" href="{{ asset('css/auth/register.css') }}">
+    <meta charset="UTF-8">
+    <title>Registrasi SIMARSU</title>
+    <link rel="stylesheet" href="{{ asset('css/auth/register.css') }}">
+    <style>
+        .alert-danger {
+            background-color: #ffe4e4;
+            border: 1px solid #ff4d4d;
+            color: #a60000;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
 
-    <!-- Font Alexandria -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&display=swap" rel="stylesheet">
-    <!-- Font Alexandria -->
+        .alert-success {
+            background-color: #e8ffea;
+            border: 1px solid #32cd32;
+            color: #2d7a2d;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .error {
+            color: #d00;
+            font-size: 0.9em;
+            margin-top: 4px;
+            display: block;
+        }
+    </style>
 </head>
 <body>
-  <main class="container">
-    <form id="multiForm" method="POST" action="" novalidate>
-      @csrf
 
-      <h1 class="title">Daftar Akun</h1>
+<h2>Registrasi SIMARSU</h2>
 
-      <div class="progress">
-        <div class="progress-bar" id="progressBar" style="width:33%"></div>
-      </div>
+@if (session('success'))
+    <div class="alert alert-success">{{ session('success') }}</div>
+@endif
 
-      <!-- STEP 1: Personal -->
-      <section class="form-step active" data-step="1">
-        <h2>Informasi Pribadi</h2>
-        <div class="field">
-          <label for="nik">NIK</label>
-          <input id="nik" name="nik" type="text" required />
-          <small class="error"></small>
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+<form action="{{ route('form.user.submit') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+
+    <!-- Bagian 1: Biodata -->
+    <div class="step active" id="step-1">
+        <h3>Bagian 1: Biodata</h3>
+
+        <label>NIK:</label>
+        <input type="text" name="nik" value="{{ old('nik') }}" required>
+        @error('nik') <span class="error">{{ $message }}</span> @enderror
+
+        <label>Nama:</label>
+        <input type="text" name="nama" value="{{ old('nama') }}" required>
+        @error('nama') <span class="error">{{ $message }}</span> @enderror
+
+        <label>Tempat Lahir:</label>
+        <input type="text" name="tempat_lahir" value="{{ old('tempat_lahir') }}" required>
+        @error('tempat_lahir') <span class="error">{{ $message }}</span> @enderror
+
+        <label>Tanggal Lahir:</label>
+        <input type="date" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}" required>
+        @error('tanggal_lahir') <span class="error">{{ $message }}</span> @enderror
+
+        <label>Jenis Kelamin:</label>
+        <div class="radio-group">
+            <label><input type="radio" name="jenis_kelamin" value="Laki-laki" {{ old('jenis_kelamin') == 'Laki-laki' ? 'checked' : '' }}> Laki-laki</label>
+            <label><input type="radio" name="jenis_kelamin" value="Perempuan" {{ old('jenis_kelamin') == 'Perempuan' ? 'checked' : '' }}> Perempuan</label>
         </div>
+        @error('jenis_kelamin') <span class="error">{{ $message }}</span> @enderror
 
-        <div class="field">
-          <label for="fullname">Nama Lengkap</label>
-          <input id="fullname" name="fullname" type="text" required />
-          <small class="error"></small>
+        <label>Agama:</label>
+        <input type="text" name="agama" value="{{ old('agama') }}" required>
+        @error('agama') <span class="error">{{ $message }}</span> @enderror
+
+        <label>No. HP:</label>
+        <input type="text" name="no_hp" value="{{ old('no_hp') }}" placeholder="8123456789" required>
+        @error('no_hp') <span class="error">{{ $message }}</span> @enderror
+    </div>
+
+    <!-- Bagian 2: Status -->
+    <div class="step" id="step-2">
+        <h3>Bagian 2: Status</h3>
+
+        <label>Status Perkawinan:</label>
+        <div class="radio-group">
+            <label><input type="radio" name="status_perkawinan" value="Belum" {{ old('status_perkawinan') == 'Belum' ? 'checked' : '' }}> Belum</label>
+            <label><input type="radio" name="status_perkawinan" value="Sudah" {{ old('status_perkawinan') == 'Sudah' ? 'checked' : '' }}> Sudah</label>
         </div>
+        @error('status_perkawinan') <span class="error">{{ $message }}</span> @enderror
 
-        <div class="field">
-          <label for="tempat-lahir">Tempat Lahir</label>
-          <input id="tempat-lahir" name="tempat-lahir" type="text" required />
-          <small class="error"></small>
-        </div>
+        <label>Status Dalam Keluarga:</label>
+        <select name="status_dalam_keluarga" required>
+            <option value="">-- Pilih --</option>
+            <option value="Kepala Keluarga" {{ old('status_dalam_keluarga') == 'Kepala Keluarga' ? 'selected' : '' }}>Kepala Keluarga</option>
+            <option value="Anak" {{ old('status_dalam_keluarga') == 'Anak' ? 'selected' : '' }}>Anak</option>
+            <option value="Istri" {{ old('status_dalam_keluarga') == 'Istri' ? 'selected' : '' }}>Istri</option>
+            <option value="Famili Lain" {{ old('status_dalam_keluarga') == 'Famili Lain' ? 'selected' : '' }}>Famili Lain</option>
+        </select>
+        @error('status_dalam_keluarga') <span class="error">{{ $message }}</span> @enderror
 
-        <div class="field">
-          <label for="jenis-kelamin">Jenis Kelamin</label>
-          <div class="radio-group">
-            <label><input type="radio" name="jenis-kelamin" value="L"> Laki-Laki</label>
-            <label><input type="radio" name="jenis-kelamin" value="P"> Perempuan</label>
-          </div>
-          <small class="error"></small>
-        </div>
+        <label>Pekerjaan:</label>
+        <input type="text" name="pekerjaan" value="{{ old('pekerjaan') }}" required>
+        @error('pekerjaan') <span class="error">{{ $message }}</span> @enderror
+    </div>
 
-        <div class="field">
-          <label for="status-perkawinan">Status Perkawinan</label>
-          <div class="radio-group">
-            <label><input type="radio" name="status-perkawinan" value="belum-kawin"> Belum Kawin</label>
-            <label><input type="radio" name="status-perkawinan" value="sudah-menikah"> Sudah Menikah</label>
-          </div>
-          <small class="error"></small>
-        </div>
+    <!-- Bagian 3: Alamat -->
+    <div class="step" id="step-3">
+        <h3>Bagian 3: Alamat</h3>
 
+        <label>Nama Jalan:</label>
+        <input type="text" name="nama_jalan" value="{{ old('nama_jalan') }}" required>
+        @error('nama_jalan') <span class="error">{{ $message }}</span> @enderror
 
-        <div class="field">
-          <label for="pekerjaan">Pekerjaan</label>
-          <input id="pekerjaan" name="pekerjaan" type="text" required />
-          <small class="error"></small>
-        </div>
+        <label>Provinsi:</label>
+        <input type="text" name="provinsi" value="Jawa Timur" readonly>
 
-        <div class="field">
-          <label for="phone">No. Handphone</label>
-          <input id="phone" name="phone" type="tel" required />
-          <small class="error"></small>
-        </div>
+        <label>Kota/Kab:</label>
+        <select name="kota" id="kota" required>
+            <option value="">-- Pilih Kota --</option>
+        </select>
+        @error('kota') <span class="error">{{ $message }}</span> @enderror
 
-        <div class="actions">
-          <button type="button" class="btn btn-next">Lanjutkan</button>
-        </div>
-      </section>
+        <label>Kecamatan:</label>
+        <select name="kecamatan" id="kecamatan" required></select>
+        @error('kecamatan') <span class="error">{{ $message }}</span> @enderror
 
-      <!-- STEP 2: Address -->
-      <section class="form-step" data-step="2">
-        <h2>Alamat</h2>
-        <div class="field">
-          <label for="address">Alamat Lengkap</label>
-          <input id="address" name="address" type="text" required />
-          <small class="error"></small>
-        </div>
+        <label>Kel/Desa:</label>
+        <select name="kelurahan" id="kelurahan" required></select>
+        @error('kelurahan') <span class="error">{{ $message }}</span> @enderror
 
-        <div class="field-grid">
-          <div class="field">
-            <label for="rt">RT</label>
-            <input id="rt" name="rt" type="number" required />
-            <small class="error"></small>
-          </div>
-          <div class="field">
-            <label for="rw">RW</label>
-            <input id="rw" name="rw" type="number"/>
-            <small class="error"></small>
-          </div>
-        </div>
+        <label>RT:</label>
+        <input type="number" name="rt" value="{{ old('rt') }}" max="37" required>
+        @error('rt') <span class="error">{{ $message }}</span> @enderror
 
-        <div class="field-grid">
-          <div class="field">
-            <label for="kel-desa">Kelurahan/Desa</label>
-            <input id="kel-desa" name="kel-desa" type="text" required />
-            <small class="error"></small>
-          </div>
+        <label>RW:</label>
+        <input type="number" name="rw" value="{{ old('rw') }}" max="10" required>
+        @error('rw') <span class="error">{{ $message }}</span> @enderror
+    </div>
 
-          <div class="field">
-            <label for="kecamatan">Kecamatan</label>
-            <input id="kecamatan" name="kecamatan" type="text" required />
-            <small class="error"></small>
-          </div>
-        </div>
+    <!-- Bagian 4: Akun -->
+    <div class="step" id="step-4">
+        <h3>Bagian 4: Akun</h3>
 
+        <label>Email:</label>
+        <input type="email" name="email" value="{{ old('email') }}" required>
+        @error('email') <span class="error">{{ $message }}</span> @enderror
 
-        <div class="field-grid">
-          <div class="field">
-            <label for="city">Kota/Kab</label>
-            <input id="city" name="city" type="text" required />
-            <small class="error"></small>
-          </div>
+        <label>Password:</label>
+        <input type="password" name="password" required>
+        @error('password') <span class="error">{{ $message }}</span> @enderror
 
-          <div class="field">
-            <label for="postal">Kode Pos</label>
-            <input id="postal" name="postal" type="text" pattern="\d{4,6}" />
-            <small class="error"></small>
-          </div>
-        </div>
+        <label>Foto KTP:</label>
+        <input type="file" name="foto_ktp" accept="image/*" required>
+        @error('foto_ktp') <span class="error">{{ $message }}</span> @enderror
+    </div>
 
-        <div class="field">
-          <label for="ktp">Upload KTP atau Kartu Identitas</label>
-          <input id="ktp" name="ktp" type="file" accept="image/*,.pdf" />
-          <small class="error"></small>
-        </div>
+    <div class="nav-buttons">
+        <button type="button" id="prevBtn" onclick="nextPrev(-1)">Sebelumnya</button>
+        <button type="button" id="nextBtn" onclick="nextPrev(1)">Berikutnya</button>
+        <button type="submit" id="submitBtn">Simpan</button>
+    </div>
+</form>
 
-
-        <div class="actions">
-          <button type="button" class="btn btn-prev">Kembali</button>
-          <button type="button" class="btn btn-next">Lanjutkan</button>
-        </div>
-      </section>
-
-      <!-- STEP 3: Account -->
-      <section class="form-step" data-step="3">
-        <h2>Akun</h2>
-        <div class="field">
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" required />
-          <small class="error"></small>
-        </div>
-
-        <div class="field-grid">
-          <div class="field">
-            <label for="password">Password</label>
-            <input id="password" name="password" type="password" minlength="8" required />
-            <small class="error"></small>
-          </div>
-          <div class="field">
-            <label for="password_confirmation">Konfirmasi Password</label>
-            <input id="password_confirmation" name="password_confirmation" type="password" minlength="8" required />
-            <small class="error"></small>
-          </div>
-        </div>
-
-
-        <div class="actions">
-          <button type="button" class="btn btn-prev">Kembali</button>
-          <button type="submit" class="btn btn-submit">Daftar</button>
-        </div>
-      </section>
-
-      <!-- Optional confirm message area -->
-      <div id="formMsg" class="form-msg" aria-live="polite"></div>
-    </form>
-  </main>
-
-  <!-- link ke file JS jika ingin -->
-  <script src="{{ asset('js/register.js') }}"></script>
+<script src="{{ asset('js/auth/register.js') }}"></script>
 </body>
 </html>

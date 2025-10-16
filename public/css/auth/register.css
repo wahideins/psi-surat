@@ -1,290 +1,109 @@
-/* public/css/register-multi.css or resources/css if using Mix/Vite */
-:root{
-  --bg:#f5f7fb;
-  --card:#ffffff;
-  --accent:#287161;
-  --muted:#6b7280;
-  --danger:#ef4444;
-  --radius:12px;
+body {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+    background: #f7f7f7;
 }
 
-*{
-  box-sizing:border-box;
-  font-family:'Alexandria';
-}
-body{
-  margin:0;
-  font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
-  background:linear-gradient(180deg,#eef2ff 0%,var(--bg) 100%);
-  color:#111827;
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:24px;
+h2 {
+    text-align: center;
 }
 
-.container{
-  width:100%;
-  max-width:720px;
-  background:var(--card);
-  border-radius:var(--radius);
-  box-shadow:0 6px 30px rgba(16,24,40,0.08);
-  padding:28px;
+form {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
 }
 
-.title{
-  margin:0 0 12px;
-  font-size:20px;
-  font-weight:600;
-  color:#0f172a;
+.step {
+    display: none;
 }
 
-.progress{
-  height:8px;
-  width:100%;
-  background:#e6eefc;
-  border-radius:999px;
-  margin-bottom:20px;
-  overflow:hidden;
-}
-.progress-bar{
-  height:100%;
-  background:linear-gradient(90deg,var(--accent),#287161);
-  width:0%;
-  transition:width .35s ease;
+.step.active {
+    display: block;
 }
 
-.form-step{ display:none; animation:fadeIn .25s ease; }
-.form-step.active{ display:block; }
-
-.form-step h2{ margin:4px 0 14px; font-size:16px; color:#0f172a; }
-
-.field{ margin-bottom:14px; }
-.field-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px; }
-
-label{ display:block; font-size:13px; color:var(--muted); margin-bottom:6px; }
-input[type="text"],
-input[type="tel"],
-input[type="email"],
-input[type="password"]{
-  width:100%;
-  padding:10px 12px;
-  font-size:14px;
-  border:1px solid #e6eefc;
-  border-radius:8px;
-  background:#fbfdff;
-  outline:none;
-  transition:border-color .15s, box-shadow .15s;
-}
-input:focus{ border-color:var(--accent); box-shadow:0 4px 16px rgba(59,130,246,0.08); }
-
-.error{ color:var(--danger); font-size:12px; display:block; height:14px; margin-top:6px; }
-
-.actions{ display:flex; gap:10px; justify-content:flex-end; margin-top:6px; }
-.btn{
-  padding:8px 14px;
-  border-radius:10px;
-  border:0;
-  cursor:pointer;
-  font-weight:600;
-}
-.btn-next{ background:var(--accent); color:white; }
-.btn-prev{ background:#eef2ff; color:var(--accent); }
-.btn-submit{ background:#10b981; color:white; }
-
-.btn:active{ transform:translateY(1px); }
-
-.form-msg{
-  margin-top:16px;
-  font-size:14px;
-  color:var(--muted);
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
 }
 
-/* responsive */
-@media (max-width:600px){
-  .field-grid{ grid-template-columns:1fr; }
-  .actions{ flex-direction:column-reverse; align-items:stretch; }
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    box-sizing: border-box;
 }
 
-/* small animation */
-@keyframes fadeIn{
-  from{ opacity:0; transform:translateY(6px) }
-  to{ opacity:1; transform:none }
-}
-
-/* === General field style === */
-.field {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1rem;
-}
-
-.field label {
-  font-weight: 600;
-  margin-bottom: 0.3rem;
-  color: #333;
-}
-
-/* === Input umum === */
-.field input[type="text"],
-.field input[type="email"],
-.field input[type="password"],
-.field input[type="tel"],
-.field input[type="date"],
-.field input[type="number"] {
-  padding: 0.6rem 0.8rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 1rem;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.field input:focus {
-  border-color: #287161;
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
-  outline: none;
-}
-
-/* === Date picker khusus === */
-.field input[type="date"] {
-  appearance: none; /* Hilangkan style default browser */
-  background-color: #fff;
-  color: #333;
-  cursor: pointer;
-}
-
-.field input[type="date"]::-webkit-calendar-picker-indicator {
-  background: url("data:image/svg+xml,%3Csvg fill='black' xmlns='http://www.w3.org/2000/svg' height='20' width='20' viewBox='0 0 20 20'%3E%3Cpath d='M15 3h-1V1h-2v2H8V1H6v2H5a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm0 13H5V8h10v8z'/%3E%3C/svg%3E") no-repeat center;
-  opacity: 0.6;
-  cursor: pointer;
-}
-
-.field input[type="date"]:hover::-webkit-calendar-picker-indicator {
-  opacity: 1;
-}
-
-/* === Radio group === */
 .radio-group {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem; /* jarak antar pilihan */
-  flex-wrap: wrap;
-}
-
-.radio-group label {
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-  cursor: pointer;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center; /* sejajarkan secara vertikal */
 }
 
 .radio-group input[type="radio"] {
-  accent-color: #287161; /* warna biru modern */
-  transform: scale(1.1);
+    vertical-align: middle;
+    margin-right: 5px;
+    transform: translateY(1px); /* sedikit turun agar sejajar sempurna */
 }
 
-/* === Tombol aksi === */
-.actions {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 1rem;
-}
-
-.btn {
-  background-color: #287161;
-  color: #fff;
-  border: none;
-  padding: 0.6rem 1.2rem;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.2s;
-}
-
-.btn:hover {
-  background-color: #287161a9;
-}
-
-/* === FIELD DASAR === */
-.field {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1rem;
-}
-
-.field label {
-  font-weight: 600;
-  margin-bottom: 0.3rem;
-  color: #333;
-}
-
-/* === FILE INPUT === */
-.field input[type="file"] {
-  position: relative;
-  padding: 0.5rem 0.8rem;
-  font-size: 0.95rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #f8f9fa;
-  cursor: pointer;
-  transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
-  color: #333;
-}
-
-.field input[type="file"]:hover {
-  background-color: #eef4ff;
-  border-color: #287161;
-}
-
-.field input[type="file"]:focus {
-  outline: none;
-  border-color: #287161;
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
-}
-
-/* === Hapus tampilan default teks file di Chrome === */
-.field input[type="file"]::-webkit-file-upload-button {
-  background-color: #287161;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 0.4rem 1rem;
-  font-weight: 500;
-  cursor: pointer;
-  margin-right: 0.7rem;
-  transition: background-color 0.2s;
-}
-
-.field input[type="file"]::-webkit-file-upload-button:hover {
-  background-color: #287161;
-}
-
-/* Firefox style */
-.field input[type="file"]::file-selector-button {
-  background-color: #287161;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 0.4rem 1rem;
-  font-weight: 500;
-  cursor: pointer;
-  margin-right: 0.7rem;
-  transition: background-color 0.2s;
-}
-
-.field input[type="file"]::file-selector-button:hover {
-  background-color: #287161;
-}
-
-/* === Pesan error kecil di bawah field === */
-.field small.error {
-  color: #d9534f;
-  margin-top: 0.25rem;
-  font-size: 0.85rem;
+.radio-group label {
+    display: flex;
+    align-items: center; /* pastikan teks sejajar dengan bulatan radio */
+    font-weight: normal;
+    margin-right: 20px;
 }
 
 
+.nav-buttons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+.alert.success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+input.invalid, select.invalid {
+    border: 1px solid red;
+    background: #ffeaea;
+}
+
+
+.alert-danger {
+    background-color: #ffe4e4;
+    border: 1px solid #ff4d4d;
+    color: #a60000;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.error {
+    color: #d00;
+    font-size: 0.9em;
+    margin-top: 4px;
+}

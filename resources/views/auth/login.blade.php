@@ -36,17 +36,19 @@
                 <h1>Login</h1>
             </div>
             <div class="form">
-                <form action="">
-                    <label for="nik">NIK</label>
-                    <input type="text" id="nik" placeholder="Masukkan NIK Anda">
+                <form method="POST" action="{{ route('login.submit') }}">
+                    @csrf
+                    <h2>Login</h2>
+                    @if($errors->any())
+                        <div class="alert">{{ $errors->first() }}</div>
+                    @endif
+                    <label>Email</label>
+                    <input type="email" name="email" required>
 
-                    <label for="email">Email/No. Hp</label>
-                    <input type="text" id="email" placeholder="Masukkan Email/No. HP Anda">
+                    <label>Password</label>
+                    <input type="password" name="password" required>
 
-                    <label for="password">Password</label>
-                    <input type="text" id="password" placeholder="Masukkan Password Anda">
-
-                    <button type="submit" class="btn-submit">Login</button>
+                    <button type="submit">Masuk</button>
                     <p>Belum Punya Akun? <a href="{{url('/register')}}">Daftar</a></p>
                 </form>
             </div>
