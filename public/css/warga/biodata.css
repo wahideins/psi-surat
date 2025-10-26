@@ -1,0 +1,49 @@
+.biodata {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 2rem;
+    color: #2C6F56;
+    margin-top: 20px;
+}
+
+.biodata table {
+    border: none;
+    border-collapse: collapse;
+    font-size: 15px;
+    color: #2C6F56;
+    width: 45%;
+}
+
+.biodata th, .biodata td {
+    border: none;
+    padding: 6px 10px;
+    text-align: left;
+    vertical-align: top;
+}
+
+.biodata th {
+    font-weight: 600;
+    width: 40%;
+}
+
+.header {
+    text-align: left;
+    margin-top: 20px;
+    color: #2C6F56;
+}
+
+.header h2 {
+    margin-bottom: 5px;
+}
+
+@media (max-width: 768px) {
+    .biodata {
+        flex-direction: column;
+        align-items: center;
+    }
+    .biodata table {
+        width: 90%;
+    }
+}

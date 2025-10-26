@@ -1,4 +1,8 @@
-@extends('warga.layouts.layoutsWarga')
+@extends('kelurahan.layoutsKelurahan')
+
+@section('title')
+Dashboard Kelurahan
+@endsection
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/warga/dashboard.css') }}">
@@ -11,7 +15,7 @@
 </div>
 
 <div class="judul">
-    <h1>Dashboard</h1>
+    <h1>Dashboard Kelurahan</h1>
 </div>
 
 <div class="main">
