@@ -47,8 +47,8 @@
 
                     <label>Password</label>
                     <input type="password" name="password" required>
-
-                    <button type="submit">Masuk</button>
+                    
+                    <button class="btn-submit" type="submit">Masuk</button>
                     <p>Belum Punya Akun? <a href="{{url('/register')}}">Daftar</a></p>
                 </form>
             </div>

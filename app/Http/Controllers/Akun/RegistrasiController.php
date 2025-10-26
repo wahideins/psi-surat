@@ -98,6 +98,13 @@ class RegistrasiController extends Controller
             \Log::warning('Gagal mengirim email verifikasi: '.$e->getMessage());
         }
 
+        $alamat = $validated['nama_jalan'] . ', RT ' . $validated['rt'] .
+                ', RW ' . $validated['rw'] .
+                ', Kel. ' . $validated['kelurahan'] .
+                ', Kec. ' . $validated['kecamatan'] .
+                ', ' . $validated['kota'] .
+                ', ' . $validated['provinsi'];
+
 
         // Simpan ke Firestore
         $userData = [
@@ -110,8 +117,9 @@ class RegistrasiController extends Controller
             'agama' => $validated['agama'],
             'noHp' => $validated['no_hp'],
             'statusPerkawinan' => $validated['status_perkawinan'],
-            'statusDalamKeluarga' => $validated['status_dalam_keluarga'],
+            'statusDiKeluarga' => $validated['status_dalam_keluarga'],
             'pekerjaan' => $validated['pekerjaan'],
+            'alamat' => $alamat,
             'namaJalan' => $validated['nama_jalan'],
             'provinsi' => $validated['provinsi'],
             'kota' => $validated['kota'],
